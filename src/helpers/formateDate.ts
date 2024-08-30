@@ -1,4 +1,4 @@
-export function formatDate (date) {
+export function formatDate (date: Date): string {
     const options = {
         weekday: 'long',
         year: 'numeric',
