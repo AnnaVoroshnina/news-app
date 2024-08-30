@@ -6,13 +6,33 @@ import axios from "axios";
 const BASE_URL = import.meta.env.VITE_NEWS_BASE_API_URL;
 const API_KEY = import.meta.env.VITE_NEWS_API_KEY; //будем отправлять в params с запросом
 
-export const getNews = async (page_number: number = 1, page_size: number = 10) => { //эту функцию будем вызывать при запросе на сервер
+type TypeGetNewsProps = {
+    page_number: number,
+    page_size: number,
+    category: string | null
+}
+
+export const getNews = async (props: TypeGetNewsProps)=> { //эту функцию будем вызывать при запросе на сервер
     try { //для импортирования данных используем метод get
         const response = await axios.get(`${BASE_URL}search`, {
             params: {
                 apiKey: API_KEY,
-                page_number,
-                page_size,
+                page_number: props.page_number,
+                page_size: props.page_size,
+                category: props.category
+            }
+        })
+        return response.data
+    }
+    catch (error){
+        console.log(error)
+    }
+}
+export const getCategories = async () => { //эту функцию будем вызывать при запросе на сервер
+    try { //для импортирования данных используем метод get
+        const response = await axios.get(`${BASE_URL}available/categories`, {
+            params: {
+                apiKey: API_KEY,
             }
         })
         return response.data
