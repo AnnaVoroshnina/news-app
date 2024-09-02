@@ -10,6 +10,7 @@ type TypeGetNewsProps = {
     page_number: number,
     page_size: number,
     category: string | null
+    keywords: string
 }
 
 export const getNews = async (props: TypeGetNewsProps)=> { //эту функцию будем вызывать при запросе на сервер
@@ -19,7 +20,8 @@ export const getNews = async (props: TypeGetNewsProps)=> { //эту функци
                 apiKey: API_KEY,
                 page_number: props.page_number,
                 page_size: props.page_size,
-                category: props.category
+                category: props.category,
+                keywords: props.keywords
             }
         })
         return response.data
