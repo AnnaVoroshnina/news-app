@@ -26,7 +26,7 @@ export const Main = () => {
     return (
         <main className={styles.main}>
             {data && data.news.length > 0 && !isLoading
-                ? (<LatestNews banners={data && data.news}/>)
+                ? (<LatestNews/>)
                 : (<Skeleton type={'banner'} count={10}/>)
             }
             <NewsByFilters filters={filters} changeFilter={changeFilter} isLoading={isLoading} news={data?.news}/>
