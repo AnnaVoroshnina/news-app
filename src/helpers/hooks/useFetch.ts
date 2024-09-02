@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 
 export const useFetch = (fetchFunction, params) => {
     const [data, setData] = useState(null)
-    const [isLoading, setLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState(null)
 
     //преобразовываем зараметры из массива в строку, чтобы легче было сравнивать в зависимости у useEffect
@@ -10,13 +10,13 @@ export const useFetch = (fetchFunction, params) => {
     useEffect(() => {
         (async () => {
             try {
-                setLoading(true)
+                setIsLoading(true)
                 const result = await fetchFunction(params)
                 setData(result)
             } catch (error) {
                 setError(error)
             } finally {
-                setLoading(false)
+                setIsLoading(false)
             }
         })()
 
