@@ -1,0 +1,19 @@
+.search{
+    display: flex;
+    width: 100%;
+    background-color: white;
+    gap: 12px;
+}
+
+.input{
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #e7e7ff;
+    border-radius: 12px;
+    color: #6b4eff;
+    outline: none;
+}
+.input::placeholder{
+    color: rgba(107, 78, 255, 0.79);
+}
