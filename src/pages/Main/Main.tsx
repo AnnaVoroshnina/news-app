@@ -6,6 +6,8 @@ import {NewsList} from "../../components/NewsList/NewsList.tsx";
 import {Skeleton} from "../../components/Skeleton/Skeleton.tsx";
 import {Pagination} from "../../components/Pagination/Pagination.tsx";
 import {Categories} from "../../components/Categories/Categories.tsx";
+import {Search} from "../../components/Search/Search.tsx";
+import {useDebounce} from "../../helpers/hooks/useDebounce.ts";
 
 
 export const Main = () =>{
@@ -22,6 +24,8 @@ export const Main = () =>{
     const totalPages:number = 10
     const pageSize:number = 10
 
+    const [keywords, setKeywords] = useState('');
+    const debouncedKeyWords = useDebounce(keywords, 1500)
     //запрос к серверу новости
     const fetchNews = async (currentPage) =>{
         try {
@@ -29,7 +33,8 @@ export const Main = () =>{
             const response = await getNews({
                 page_number: currentPage,
                 page_size: pageSize,
-                category: selectedCategory === 'All'? null : selectedCategory
+                category: selectedCategory === 'All'? null : selectedCategory,
+                keywords: debouncedKeyWords
             })
             setNews(response.news)
             setIsLoading(false)
@@ -55,8 +60,7 @@ export const Main = () =>{
 
     useEffect(() => {
         fetchNews(currentPage)
-    }, [currentPage, selectedCategory]);
-
+    }, [currentPage, selectedCategory, debouncedKeyWords]);
 //навигация по кнопкам
     const handleNextPage = () => {
         if (currentPage < totalPages) {
@@ -76,6 +80,7 @@ export const Main = () =>{
     return (
         <main className={styles.main}>
             <Categories categories={categories} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
+            <Search keywords={keywords} setKeywords={setKeywords}/>
             {news.length > 0 && !isLoading ? (<NewsBanner item={news[0]}/>) : (<Skeleton type={'banner'} count={1} />)}
             <Pagination
                 totalPages={totalPages}
