@@ -30,6 +30,20 @@ export const getNews = async (props: TypeGetNewsProps)=> { //эту функци
         console.log(error)
     }
 }
+
+export const getLatestNews = async (props: TypeGetNewsProps)=> { //эту функцию будем вызывать при запросе на сервер
+    try { //для импортирования данных используем метод get
+        const response = await axios.get(`${BASE_URL}latest-news`, {
+            params: {
+                apiKey: API_KEY,
+            }
+        })
+        return response.data
+    }
+    catch (error){
+        console.log(error)
+    }
+}
 export const getCategories = async () => { //эту функцию будем вызывать при запросе на сервер
     try { //для импортирования данных используем метод get
         const response = await axios.get(`${BASE_URL}available/categories`, {

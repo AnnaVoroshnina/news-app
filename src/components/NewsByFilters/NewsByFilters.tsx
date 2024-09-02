@@ -4,6 +4,7 @@ import {TOTAL_PAGES} from "../../constants/constants.ts";
 import {NewsList} from "../NewsList/NewsList.tsx";
 import {Skeleton} from "../Skeleton/Skeleton.tsx";
 import {NewsFilters} from "../NewsFilters/NewsFilters.tsx";
+import {PaginationWrapper} from "../PaginationWrapper/PaginationWrapper.tsx";
 
 export const NewsByFilters = ({filters, changeFilter, isLoading, news}) =>{
 
@@ -25,21 +26,17 @@ export const NewsByFilters = ({filters, changeFilter, isLoading, news}) =>{
     return (
         <section className={styles.section}>
             <NewsFilters filters={filters} changeFilter={changeFilter} />
-            <Pagination
+            <PaginationWrapper
+                top={true}
+                bottom={false}
                 totalPages={TOTAL_PAGES}
                 handleNextPage={handleNextPage}
                 handlePrevPage={handlePrevPage}
                 handlePageClick={handlePageClick}
                 currentPage={filters.page_number}
-            />
-            {!isLoading ? (<NewsList news={news}/>) : (<Skeleton type={'item'} count={10}/>)}
-            <Pagination
-                totalPages={TOTAL_PAGES}
-                handleNextPage={handleNextPage}
-                handlePrevPage={handlePrevPage}
-                handlePageClick={handlePageClick}
-                currentPage={filters.page_number}
-            />
+            >
+                {!isLoading ? (<NewsList news={news}/>) : (<Skeleton type={'item'} count={10}/>)}
+            </PaginationWrapper>
         </section>
     )
 }
