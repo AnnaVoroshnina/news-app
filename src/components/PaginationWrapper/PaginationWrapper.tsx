@@ -1,11 +1,14 @@
-import styles from './styles.module.css'
 import {Pagination} from "../Pagination/Pagination.tsx";
-import {TOTAL_PAGES} from "../../constants/constants.ts";
-import {NewsList} from "../NewsList/NewsList.tsx";
-import {Skeleton} from "../Skeleton/Skeleton.tsx";
-import {NewsFilters} from "../NewsFilters/NewsFilters.tsx";
+import React from "react";
+import {IPaginationProps} from "../../interfaces";
 
-export const PaginationWrapper = ({top, bottom, children, ...paginationProps}) =>{
+interface PropsPaginationWrapper {
+    children: React.ReactNode;
+    top?: boolean,
+    bottom?: boolean,
+
+}
+export const PaginationWrapper = ({top, bottom, children, ...paginationProps}: PropsPaginationWrapper & IPaginationProps) =>{
 return (
     <>
         {top && <Pagination{...paginationProps}/>}

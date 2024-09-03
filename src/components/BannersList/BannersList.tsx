@@ -1,12 +1,16 @@
 import styles from './styles.module.css'
 import {NewsBanner} from "../NewsBanner/newsBanner.tsx";
+import {INews} from "../../interfaces";
 
-export const BannersList = ({banners}) =>{
+interface PropsBanners {
+    banners?: INews[] | null;
+}
+export const BannersList = ({banners}: PropsBanners) =>{
     return (
         <ul className={styles.banners}>
             {banners?.map(banner => {
                 return (
-                    <NewsBanner key={banner.id} item={banner}/>)
+                    <NewsBanner item={banner}/>)
             })}
         </ul>
     )

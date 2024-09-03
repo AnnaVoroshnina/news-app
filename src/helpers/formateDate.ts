@@ -1,5 +1,5 @@
 export function formatDate (date: Date): string {
-    const options = {
+    const options: Intl.DateTimeFormatOptions = {
         weekday: 'long',
         year: 'numeric',
         month: 'long',
