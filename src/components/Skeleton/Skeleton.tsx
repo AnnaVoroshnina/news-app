@@ -4,7 +4,7 @@ export const Skeleton = ({count = 1, type = 'banner'}) =>{
     return(
         <>
             {count > 1? (
-            <ul className={styles.list}>
+            <ul className={type === 'banner' ? styles.list_column : styles.list_row}>
                 {[...Array(count)].map((_, index) => (
                     <li key={index} className={type === 'banner' ? styles.banner : styles.item}></li>)
                 )}
