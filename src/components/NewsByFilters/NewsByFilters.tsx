@@ -1,12 +1,30 @@
 import styles from './styles.module.css'
-import {Pagination} from "../Pagination/Pagination.tsx";
-import {TOTAL_PAGES} from "../../constants/constants.ts";
+import {PAGE_SIZE, TOTAL_PAGES} from "../../constants/constants.ts";
 import {NewsList} from "../NewsList/NewsList.tsx";
 import {Skeleton} from "../Skeleton/Skeleton.tsx";
 import {NewsFilters} from "../NewsFilters/NewsFilters.tsx";
 import {PaginationWrapper} from "../PaginationWrapper/PaginationWrapper.tsx";
+import {useFilters} from "../../helpers/hooks/useFilters.ts";
+import {useDebounce} from "../../helpers/hooks/useDebounce.ts";
+import {useFetch} from "../../helpers/hooks/useFetch.ts";
+import {getNews} from "../../api/apiNews.ts";
+import {NewsApiResponse, ParamsType} from "../../interfaces";
 
-export const NewsByFilters = ({filters, changeFilter, isLoading, news}) =>{
+export const NewsByFilters = () =>{
+    const {filters, changeFilter} = useFilters({
+        page_number: 1,
+        page_size: PAGE_SIZE,
+        category: null,
+        keywords: ''
+    })
+
+    const debouncedKeyWords = useDebounce(filters.keywords, 1500)
+
+
+    const {data, isLoading} = useFetch<ParamsType, NewsApiResponse>(getNews, {
+        ...filters,
+        keywords: debouncedKeyWords
+    })
 
     //навигация по кнопкам
     const handleNextPage = () => {
@@ -20,7 +38,7 @@ export const NewsByFilters = ({filters, changeFilter, isLoading, news}) =>{
 
         }
     }
-    const handlePageClick = (pageNumber) => {
+    const handlePageClick = (pageNumber: number) => {
         changeFilter('page_number', pageNumber)
     }
     return (
@@ -35,7 +53,7 @@ export const NewsByFilters = ({filters, changeFilter, isLoading, news}) =>{
                 handlePageClick={handlePageClick}
                 currentPage={filters.page_number}
             >
-                {!isLoading ? (<NewsList news={news}/>) : (<Skeleton type={'item'} count={10}/>)}
+                {!isLoading ? (<NewsList news={data?.news}/>) : (<Skeleton type={'item'} count={10}/>)}
             </PaginationWrapper>
         </section>
     )

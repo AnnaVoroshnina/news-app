@@ -1,7 +1,11 @@
 import {formatTimeAgo} from "../../helpers/formatTimeAgo.ts";
 import styles from "./styles.module.css"
+import {INews} from "../../interfaces";
 
-export const NewsItem = ({item}) => {
+interface PropsNewsItem {
+    item: INews
+}
+export const NewsItem = ({item}: PropsNewsItem) => {
     return (
         <li className={styles.item}>
             <div className={styles.wrapper} style={{backgroundImage: `url(${item.image})`}}></div>
