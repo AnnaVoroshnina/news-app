@@ -13,6 +13,7 @@ export const useFetch = <P, T> (fetchFunction: FetchFunction<P, T>, params?: P):
     const [isLoading, setIsLoading] = useState <boolean>(true)
     const [error, setError] = useState<Error | null>(null)
 
+
     //преобразовываем зараметры из массива в строку, чтобы легче было сравнивать в зависимости у useEffect
     const stringParams = params ? new URLSearchParams(params).toString() : ''
     useEffect(() => {
