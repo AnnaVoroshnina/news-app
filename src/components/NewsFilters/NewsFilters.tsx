@@ -4,14 +4,14 @@ import {Search} from "../Search/Search.tsx";
 import {useFetch} from "../../helpers/hooks/useFetch.ts";
 import {getCategories} from "../../api/apiNews.ts";
 import {Slider} from "../Slider/Slider.tsx";
-import {CategoriesType, IFilters} from "../../interfaces";
+import {CategoriesApiResponse, IFilters} from "../../interfaces";
 
 interface  PropsNewsFilters {
     filters: IFilters,
     changeFilter: (key: string, value: string | number | null) => void,
 }
 export const NewsFilters = ({filters, changeFilter} : PropsNewsFilters) => {
-    const {data: dataCategories} = useFetch<CategoriesType>(getCategories)
+    const {data: dataCategories} = useFetch<null, CategoriesApiResponse>(getCategories)
     return (
         <div className={styles.filters}>
             {dataCategories

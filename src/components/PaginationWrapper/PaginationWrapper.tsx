@@ -6,14 +6,14 @@ interface PropsPaginationWrapper {
     children: React.ReactNode;
     top?: boolean,
     bottom?: boolean,
-
 }
+
 export const PaginationWrapper = ({top, bottom, children, ...paginationProps}: PropsPaginationWrapper & IPaginationProps) =>{
 return (
     <>
-        {top && <Pagination{...paginationProps}/>}
+        {top && <Pagination {...paginationProps}/>}
         {children}
-        {bottom && <Pagination{...paginationProps}/>}
+        {bottom && <Pagination {...paginationProps}/>}
 
     </>
 )

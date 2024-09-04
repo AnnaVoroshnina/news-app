@@ -10,6 +10,7 @@ import {useFetch} from "../../helpers/hooks/useFetch.ts";
 import {getNews} from "../../api/apiNews.ts";
 import {NewsApiResponse, ParamsType} from "../../interfaces";
 
+
 export const NewsByFilters = () =>{
     const {filters, changeFilter} = useFilters({
         page_number: 1,
@@ -19,7 +20,6 @@ export const NewsByFilters = () =>{
     })
 
     const debouncedKeyWords = useDebounce(filters.keywords, 1500)
-
 
     const {data, isLoading} = useFetch<ParamsType, NewsApiResponse>(getNews, {
         ...filters,

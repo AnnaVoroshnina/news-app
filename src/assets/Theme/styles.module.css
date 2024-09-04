@@ -1,0 +1,23 @@
+
+svg .mooned {
+    transform: translate(-110px, 110px);
+    transition: all 1.2s ease-in-out;
+}
+svg .dark{
+    transition: all 0.6s;
+}
+
+svg #overlay {
+    transition: all 1.2s ease-in-out;
+}
+
+
+.container_svg{
+    transition: all 1.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    padding: 12px 24px;
+}
+.container_svg .dark{
+    background-color: #23272f;
+}
