@@ -8,6 +8,14 @@
 .arrow {
     border: none;
     padding: 5px 8px;
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: transparent;
     cursor: pointer;
+}
+
+.slider.dark .arrow {
+    color: #f6f7f9;
+}
+
+.slider.light .arrow{
+    color: black;
 }

@@ -3,6 +3,7 @@
     width: 100%;
     background-color: white;
     gap: 12px;
+    transition: all 1.2s ease-in-out;
 }
 
 .input{
@@ -16,4 +17,10 @@
 }
 .input::placeholder{
     color: rgba(107, 78, 255, 0.79);
+}
+.dark {
+    background-color: #23272f;
+}
+.light {
+    background-color: white;
 }

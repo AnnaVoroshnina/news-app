@@ -5,15 +5,32 @@
     align-items: center;
     justify-content: center;
 }
+.pagination.dark .pageNumber,
+.pagination.dark .arrow{
+    transition: all 1.2s ease-in-out;
+    color: #f6f7f9;
+}
+
+.pagination.light ,
+.pagination.list .arrow{
+    transition: all 1.2s ease-in-out;
+    color: #23272f
+}
 
 .pageNumber, .arrow {
     border:none;
-    background-color: white;
+    background-color: transparent;
     cursor: pointer;
+
 }
-.pageNumber:disabled, .arrow:disabled{
+.pageNumber:disabled, .arrow:disabled,
+.pagination.dark .pageNumber:disabled,
+.pagination.dark .arrow:disabled{
+    transition: all 1.2s ease-in-out;
+    color: #8287fe;
     cursor: default;
 }
+
 .pageNumber {
     padding: 8px;
 }
@@ -23,3 +40,6 @@
     align-items: center;
     justify-content: center;
 }
+
+
+
