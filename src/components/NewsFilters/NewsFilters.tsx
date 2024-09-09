@@ -1,17 +1,18 @@
 import styles from './styles.module.css'
 import {Categories} from "../Categories/Categories.tsx";
 import {Search} from "../Search/Search.tsx";
-import {useFetch} from "../../helpers/hooks/useFetch.ts";
-import {getCategories} from "../../api/apiNews.ts";
 import {Slider} from "../Slider/Slider.tsx";
-import {CategoriesApiResponse, IFilters} from "../../interfaces";
+import {IFilters} from "../../interfaces";
+import {useGetCategoriesNewsQuery} from "../../store/services/newsApi.ts";
+import {setFilters} from "../../store/slices/newsSlice.ts";
+import {useAppDispatch} from "../../store";
 
 interface  PropsNewsFilters {
     filters: IFilters,
-    changeFilter: (key: string, value: string | number | null) => void,
 }
-export const NewsFilters = ({filters, changeFilter} : PropsNewsFilters) => {
-    const {data: dataCategories} = useFetch<null, CategoriesApiResponse>(getCategories)
+export const NewsFilters = ({filters} : PropsNewsFilters) => {
+    const {data: dataCategories} = useGetCategoriesNewsQuery(null)
+    const dispatch = useAppDispatch()
     return (
         <div className={styles.filters}>
             {dataCategories
@@ -19,10 +20,10 @@ export const NewsFilters = ({filters, changeFilter} : PropsNewsFilters) => {
                     <Categories
                         categories={dataCategories.categories}
                         selectedCategory={filters.category}
-                        setSelectedCategory={(category) => changeFilter('category', category)}/>
+                        setSelectedCategory={(category) => dispatch(setFilters({key: 'category', value: category}))}/>
                 </Slider>
                 : null}
-            <Search keywords={filters.keywords} setKeywords={(keywords) => changeFilter('keywords', keywords)}/>
+            <Search keywords={filters.keywords} setKeywords={(keywords) => dispatch(setFilters({key: 'keywords', value: keywords}))}/>
         </div>
     )
 }
