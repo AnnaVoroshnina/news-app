@@ -1,6 +1,6 @@
 import {useTheme} from "../providers/ThemeProvider.tsx";
 import {Header} from "../../widgets/header/ui";
-import {Main} from "../../pages/main";
+import {Outlet} from "react-router-dom";
 
 export function App() {
     const {isDark}= useTheme()
@@ -8,7 +8,7 @@ export function App() {
         <div className={`app ${isDark ? 'dark' : 'light'}`}>
             <Header/>
             <div className='container'>
-                <Main/>
+                <Outlet />
             </div>
         </div>
     )
