@@ -1,5 +1,5 @@
-import {BannersList} from "./BannersList/BannersList.tsx";
 import {NewsList} from "./NewsList/NewsList.tsx";
+import {NewsFilters} from "./NewsFilters/NewsFilters.tsx";
 
-export {BannersList}
-export {NewsList}
+export {NewsList, NewsFilters}
+
