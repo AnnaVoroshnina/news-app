@@ -1,15 +1,16 @@
 import styles from './styles.module.css'
-import {NewsItem} from "../../../../entities/news/ui/NewsItem/NewsItem.tsx";
+import {NewsCard} from "../../../../entities/news/ui/NewsCard/NewsCard.tsx";
 import {INews} from "../../../../entities/news";
 
 interface PropsNewsList {
     news?: INews[]
+    type: 'banner' | 'item'
 }
-export const NewsList = ({news}: PropsNewsList) => {
+export const NewsList = ({news, type = 'item'}: PropsNewsList) => {
     return (
-        <ul className={styles.list}>
+        <ul className={`${type === 'item' ? styles.items : styles.banners}`}>
             {news?.map(item =>{
-                return (<NewsItem  item={item}/>)
+                return (<NewsCard  item={item} type={type}/>)
             })}
         </ul>
     )
