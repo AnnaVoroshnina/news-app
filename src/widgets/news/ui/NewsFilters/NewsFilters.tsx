@@ -5,20 +5,20 @@ import {Slider} from "../../../../features/slider/ui/Slider/Slider.tsx";
 import {IFilters} from "../../../../shared/interfaces";
 import {setFilters} from "../../../../entities/news/model/newsSlice.ts";
 import {useAppDispatch} from "../../../../app/appStore.ts";
-import {useGetCategoriesNewsQuery} from "../../../../entities/category/api/categoriesApi.ts";
+import {CategoriesType} from "../../../../entities/category";
 
 interface  PropsNewsFilters {
     filters: IFilters,
+    dataCategories: CategoriesType[]
 }
-export const NewsFilters = ({filters} : PropsNewsFilters) => {
-    const {data: dataCategories} = useGetCategoriesNewsQuery(null)
+export const NewsFilters = ({filters, dataCategories} : PropsNewsFilters) => {
     const dispatch = useAppDispatch()
     return (
         <div className={styles.filters}>
             {dataCategories
                 ? <Slider step={200}>
                     <Categories
-                        categories={dataCategories.categories}
+                        categories={dataCategories}
                         selectedCategory={filters.category}
                         setSelectedCategory={(category) => dispatch(setFilters({key: 'category', value: category}))}/>
                 </Slider>

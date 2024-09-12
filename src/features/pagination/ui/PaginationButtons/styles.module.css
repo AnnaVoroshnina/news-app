@@ -12,7 +12,7 @@
 }
 
 .pagination.light ,
-.pagination.list .arrow{
+.pagination.items .arrow{
     transition: all 1.2s ease-in-out;
     color: #23272f
 }
@@ -35,7 +35,7 @@
     padding: 8px;
 }
 
-.list {
+.items {
     display: flex;
     align-items: center;
     justify-content: center;
